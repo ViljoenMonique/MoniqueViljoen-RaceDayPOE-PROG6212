@@ -1,0 +1,45 @@
+name: Part 1 Structure Validation
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate required files and folders
+        run: |
+          echo "Validating Part 1 repository structure..."
+          
+          if [ ! -f "README.md" ]; then
+            echo "ERROR: README.md is missing"
+            exit 1
+          fi
+          
+          if [ ! -d "docs" ]; then
+            echo "ERROR: docs/ folder is missing"
+            exit 1
+          fi
+          
+          if [ ! -f "docs/RaceDay_ERD.png" ] && [ ! -f "docs/RaceDay_ERD.pdf" ]; then
+            echo "ERROR: ERD file missing in docs/"
+            exit 1
+          fi
+          
+          if [ ! -f "docs/RaceDay_API_Endpoint_Plan.md" ] && [ ! -f "docs/RaceDay_API_Endpoint_Plan.pdf" ]; then
+            echo "ERROR: API Endpoint Plan missing in docs/"
+            exit 1
+          fi
+          
+          if [ ! -f "docs/RaceDay_Database.sql" ]; then
+            echo "ERROR: RaceDay_Database.sql missing in docs/"
+            exit 1
+          fi
+          
+          echo "All required Part 1 files are present."
