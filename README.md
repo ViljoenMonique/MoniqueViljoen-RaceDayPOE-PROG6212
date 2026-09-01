@@ -22,7 +22,7 @@ This repository contains **Part 1: System Planning and Database**.
 - Track personal race results and performance history
 
 ## Repository Structure
-
+```bash
 RaceDay/
 ├── README.md
 ├── docs/
