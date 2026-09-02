@@ -45,11 +45,7 @@ RaceDay/
 ## CI/CD
 A GitHub Actions workflow is included that validates the repository structure on every push.
 
-**Successful CI Build Screenshot:**
-
-![CI Green Build](docs/ci-screenshot.png)
-
-*(Replace this with your actual screenshot later)*
+**Successful CI Build **
 
 ## Video Presentation
 Unlisted YouTube video link:  
