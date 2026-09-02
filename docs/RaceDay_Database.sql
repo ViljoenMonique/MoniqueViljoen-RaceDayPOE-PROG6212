@@ -1,13 +1,12 @@
 -- =============================================
 -- RaceDay Database Script
 -- PROG6212 PoE Part 1
--- Fixed version - safer drop
+-- Clean version 
 -- =============================================
 
 USE master;
 GO
 
--- Close all connections and drop the database if it exists
 IF DB_ID('RaceDayDB') IS NOT NULL
 BEGIN
     ALTER DATABASE RaceDayDB SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
@@ -33,7 +32,6 @@ CREATE TABLE [User] (
     LastName          NVARCHAR(100) NOT NULL,
     Role              NVARCHAR(20)  NOT NULL CHECK (Role IN ('Organiser', 'Participant')),
     Phone             NVARCHAR(20)  NULL,
-    ProfileImageUrl   NVARCHAR(500) NULL,
     DateCreated       DATETIME2     NOT NULL DEFAULT SYSDATETIME()
 );
 GO
@@ -100,17 +98,6 @@ CREATE TABLE Result (
 );
 GO
 
-CREATE TABLE EventImage (
-    ImageID     INT IDENTITY(1,1) PRIMARY KEY,
-    EventID     INT NOT NULL,
-    ImageUrl    NVARCHAR(500) NOT NULL,
-    Caption     NVARCHAR(200) NULL,
-    IsPrimary   BIT NOT NULL DEFAULT 0,
-    CONSTRAINT FK_EventImage_Event FOREIGN KEY (EventID) 
-        REFERENCES Event(EventID) ON DELETE CASCADE
-);
-GO
-
 -- =====================
 -- SEED DATA
 -- =====================
@@ -148,12 +135,6 @@ GO
 INSERT INTO Result (EnrolmentID, FinishTime, Position, Status, Notes) VALUES
 (1, '03:45:22', 156, 'Finished', 'Strong finish'),
 (3, '01:52:10', 89, 'Finished', NULL);
-GO
-
-INSERT INTO EventImage (EventID, ImageUrl, Caption, IsPrimary) VALUES
-(1, 'https://raceday.blob.core.windows.net/events/soweto-main.jpg', 'Soweto Marathon Start', 1),
-(2, 'https://raceday.blob.core.windows.net/events/cpt-cycle.jpg', 'Cape Town Cycle Tour', 1),
-(3, 'https://raceday.blob.core.windows.net/events/durban-walk.jpg', 'Durban Beachfront', 1);
 GO
 
 PRINT 'RaceDayDB created and seeded successfully.';
