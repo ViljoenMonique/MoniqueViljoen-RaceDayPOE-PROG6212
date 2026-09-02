@@ -1,12 +1,13 @@
 -- =============================================
 -- RaceDay Database Script
 -- PROG6212 PoE Part 1
--- Must match the ERD exactly
+-- Fixed version - safer drop
 -- =============================================
 
 USE master;
 GO
 
+-- Close all connections and drop the database if it exists
 IF DB_ID('RaceDayDB') IS NOT NULL
 BEGIN
     ALTER DATABASE RaceDayDB SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
@@ -114,7 +115,6 @@ GO
 -- SEED DATA
 -- =====================
 
--- 2 Organisers + 2 Participants
 INSERT INTO [User] (Email, PasswordHash, FirstName, LastName, Role, Phone) VALUES
 ('thabo.mokoena@raceday.co.za', 'AQAAAAEAACcQAAAAEHash1', 'Thabo', 'Mokoena', 'Organiser', '0821112233'),
 ('lerato.dlamini@raceday.co.za', 'AQAAAAEAACcQAAAAEHash2', 'Lerato', 'Dlamini', 'Organiser', '0834445566'),
@@ -122,14 +122,12 @@ INSERT INTO [User] (Email, PasswordHash, FirstName, LastName, Role, Phone) VALUE
 ('nomsa.khumalo@gmail.com', 'AQAAAAEAACcQAAAAEHash4', 'Nomsa', 'Khumalo', 'Participant', '0725556677');
 GO
 
--- 3 Events
 INSERT INTO Event (OrganiserID, EventName, Description, EventDate, Location, DistanceKm, EventType, MaxParticipants, Status) VALUES
 (1, 'Soweto Marathon 2026', 'The iconic road race through the heart of Soweto', '2026-11-01', 'Soweto, Johannesburg', 42.20, 'Running', 15000, 'Open'),
 (1, 'Cape Town Cycle Tour Fun Ride', 'Scenic cycle event around the Cape Peninsula', '2026-03-08', 'Cape Town', 42.00, 'Cycling', 5000, 'Open'),
 (2, 'Durban Beachfront Walk', 'Family-friendly beach walk along the Golden Mile', '2026-05-15', 'Durban', 10.00, 'Walking', 2000, 'Open');
 GO
 
--- Categories
 INSERT INTO Category (EventID, CategoryName, DistanceKm, AgeMin, AgeMax, GenderRestriction, EntryFee) VALUES
 (1, '42km Marathon', 42.20, 18, NULL, NULL, 450.00),
 (1, '21km Half Marathon', 21.10, 16, NULL, NULL, 350.00),
@@ -140,21 +138,18 @@ INSERT INTO Category (EventID, CategoryName, DistanceKm, AgeMin, AgeMax, GenderR
 (3, '5km Family Walk', 5.00, 5, NULL, NULL, 80.00);
 GO
 
--- Enrolments
 INSERT INTO Enrolment (ParticipantID, EventID, CategoryID, Status) VALUES
-(3, 1, 1, 'Confirmed'),   -- Sipho in Soweto Marathon 42km
-(3, 2, 4, 'Confirmed'),   -- Sipho in Cape Town Cycle 42km
-(4, 1, 2, 'Confirmed'),   -- Nomsa in Soweto Half Marathon
-(4, 3, 6, 'Confirmed');   -- Nomsa in Durban 10km Walk
+(3, 1, 1, 'Confirmed'),
+(3, 2, 4, 'Confirmed'),
+(4, 1, 2, 'Confirmed'),
+(4, 3, 6, 'Confirmed');
 GO
 
--- Results
 INSERT INTO Result (EnrolmentID, FinishTime, Position, Status, Notes) VALUES
 (1, '03:45:22', 156, 'Finished', 'Strong finish'),
 (3, '01:52:10', 89, 'Finished', NULL);
 GO
 
--- Event Images
 INSERT INTO EventImage (EventID, ImageUrl, Caption, IsPrimary) VALUES
 (1, 'https://raceday.blob.core.windows.net/events/soweto-main.jpg', 'Soweto Marathon Start', 1),
 (2, 'https://raceday.blob.core.windows.net/events/cpt-cycle.jpg', 'Cape Town Cycle Tour', 1),
