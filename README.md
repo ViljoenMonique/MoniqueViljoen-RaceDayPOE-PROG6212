@@ -49,7 +49,7 @@ A GitHub Actions workflow is included that validates the repository structure on
 
 ## Video Presentation
 Unlisted YouTube video link:  
-**https://youtu.be/qv_kAdhozjU**
+https://youtu.be/qv_kAdhozjU
 
 In the video I explain:
 - ERD design decisions
