@@ -86,5 +86,49 @@ A GitHub Actions workflow is configured to restore, build, and run all unit test
 **Part 2 Video:** [Paste your Part 2 unlisted YouTube link here]
 
 ---
-
 ## Repository Structure
+```bash
+RaceDay/                              ← Root of the repository
+│
+├── docs/                             ← Part 1 planning documents
+│   ├── RaceDay_ERD.pdf
+│   ├── RaceDay_API_Endpoint_Plan.pdf (or .md)
+│   └── RaceDay_Database.sql
+│
+├── RaceDay.Api/                      ← ASP.NET Core Web API project
+│   ├── Controllers/
+│   │   ├── AuthController.cs
+│   │   ├── ProfileController.cs
+│   │   ├── EventsController.cs
+│   │   ├── CategoriesController.cs
+│   │   ├── EnrolmentsController.cs
+│   │   └── ResultsController.cs
+│   ├── Data/
+│   │   └── RaceDayDbContext.cs
+│   ├── Models/
+│   │   ├── AppUser.cs
+│   │   ├── Event.cs
+│   │   ├── Category.cs
+│   │   ├── Enrolment.cs
+│   │   └── Result.cs
+│   ├── Migrations/
+│   ├── appsettings.json
+│   ├── Program.cs
+│   └── RaceDay.Api.csproj
+│
+├── RaceDay.Contracts/                ← Shared DTOs
+│   ├── Dtos.cs
+│   └── RaceDay.Contracts.csproj
+│
+├── RaceDay.Api.Tests/                ← Unit Tests
+│   ├── AuthAndRoleTests.cs
+│   └── RaceDay.Api.Tests.csproj
+│
+├── .github/
+│   └── workflows/
+│       ├── part1-ci.yml              ← (optional - keep from Part 1)
+│       └── part2-ci.yml              ← Part 2 CI workflow
+│
+├── RaceDay.sln                       ← Solution file
+└── README.md                         ← Updated README
+
