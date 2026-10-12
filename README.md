@@ -1,62 +1,90 @@
-# RaceDay – Event Management System
-**PROG6212 Programming 2B – PoE Part 1**
+# RaceDay – Full-Stack Event Management System
 
-## Description
-RaceDay is a full-stack web-based event management system designed specifically for the South African road running, walking, and cycling community. The platform allows Event Organisers to create and manage events, categories, and participant results, while Participants can browse upcoming events, enrol in categories, track their personal performance history, and prepare for race day.
+**Module:** PROG6212 – Programming 2B  
+**Student Name:** Monique Viljoen  
+**Student Number:** ST10465636
 
-This repository contains **Part 1: System Planning and Database**.
+## Project Description
+
+RaceDay is a full-stack event management system designed for the South African road running, walking, and cycling community.  
+The system allows Event Organisers to create and manage events, categories, and results, while Participants can browse events, enrol, and track their personal performance.
+
+This repository contains all three parts of the Portfolio of Evidence.
+
+---
 
 ## User Roles
 
 ### Organiser
-- Create, edit, and delete events
-- Manage event categories
-- View all enrolments for their events
-- Capture and publish participant results
+- Register and log in
+- Create, update, and delete events
+- Manage categories for events
+- View enrolments for their events
+- Capture race results (finish times and positions)
 
 ### Participant
-- Create an account and log in
-- Browse available events
-- Enrol in an event by selecting a category
-- View personal enrolments
-- Track personal race results and performance history
+- Register and log in
+- Browse available events and categories
+- Enrol in events
+- View personal enrolments and results
+- Update their own profile
+
+---
+
+## Part 1 – System Planning and Database
+
+- Entity Relationship Diagram (ERD)
+- API Endpoint Plan
+- SQL Database Script
+
+All planning documents are available in the `/docs` folder.
+
+**Part 1 Video:** https://youtu.be/qv_kAdhozjU
+
+---
+
+## Part 2 – RESTful API Development
+
+### Technologies Used
+- ASP.NET Core Web API (.NET 8)
+- Entity Framework Core (Code-First)
+- SQL Server
+- Session-based Authentication
+- BCrypt Password Hashing
+- Swagger / OpenAPI
+- xUnit Unit Tests
+- GitHub Actions CI/CD
+
+### How to Run the API
+
+1. Open the solution (`RaceDay.Api.sln`) in Visual Studio 2022.
+2. Update the connection string in `appsettings.json` if needed.
+3. Run the following commands in the Package Manager Console:
+4. Press `F5` to run the API.
+5. Swagger will open at: `https://localhost:xxxx/swagger`
+
+### Running the Unit Tests
+
+1. Open **Test Explorer** in Visual Studio.
+2. Click **Run All**.
+3. All tests should pass.
+
+### API Endpoints Overview
+- Authentication (`/api/auth`)
+- Profile (`/api/profile`)
+- Events (`/api/events`)
+- Categories (`/api/categories`)
+- Enrolments (`/api/enrolments`)
+- Results (`/api/results`)
+
+### CI/CD
+A GitHub Actions workflow is configured to restore, build, and run all unit tests on every push.
+
+**CI Build Screenshot:**  
+![CI Build](./docs/part2-ci-screenshot.png)
+
+**Part 2 Video:** [Paste your Part 2 unlisted YouTube link here]
+
+---
 
 ## Repository Structure
-```bash
-RaceDay/
-├── README.md
-├── docs/
-│   ├── RaceDay_ERD.png                  # Entity Relationship Diagram
-│   ├── RaceDay_API_Endpoint_Plan.md     # Full API Endpoint Plan
-│   └── RaceDay_Database.sql             # SQL Database Script
-└── .github/
-└── workflows/
-└── part1-ci.yml                 # GitHub Actions CI workflow
-
-
-## How to Run the SQL Script
-
-1. Open **SQL Server Management Studio (SSMS)**.
-2. Connect to your local SQL Server instance.
-3. Open the file `docs/RaceDay_Database.sql`.
-4. Execute the entire script (press F5).
-5. Refresh Object Explorer — you should see the `RaceDayDB` database with all tables and seed data.
-
-## CI/CD
-A GitHub Actions workflow is included that validates the repository structure on every push.
-
-**Successful CI Build **
-
-## Video Presentation
-Unlisted YouTube video link:  
-https://youtu.be/qv_kAdhozjU
-
-In the video I explain:
-- ERD design decisions
-- API Endpoint Plan choices
-- Running the SQL script live in SSMS
-
-## Notes
-- The ERD, API Endpoint Plan, and SQL script are fully consistent with each other.
-- No API or MVC application code is included in Part 1 (as required by the brief).
-- Minimum of 20 meaningful commits will be made for this part.
