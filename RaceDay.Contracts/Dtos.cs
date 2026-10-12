@@ -1,4 +1,4 @@
-﻿namespace RaceDay.Contracts
+namespace RaceDay.Contracts
 {
     // ========== AUTH ==========
     public class RegisterRequest
