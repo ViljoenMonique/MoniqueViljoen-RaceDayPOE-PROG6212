@@ -83,7 +83,7 @@ A GitHub Actions workflow is configured to restore, build, and run all unit test
 **CI Build Screenshot:**  
 ![CI Build](./docs/part2-ci-screenshot.png)
 
-**Part 2 Video:** [Paste your Part 2 unlisted YouTube link here]
+**Part 2 Video:** https://youtu.be/jQnxK9J5PcQ
 
 ---
 ## Repository Structure
