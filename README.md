@@ -122,7 +122,7 @@ The Part 3 GitHub Actions workflow builds the entire solution (including the MVC
 **CI Build Screenshot:**  
 ![CI Build](./docs/Part3%20ci-green.png)
 
-**Part 3 Video:** https://youtu.be/bvKU2x_U31A
+**Part 3 Video:** https://youtu.be/xR-FXdN32aE
 
 ---
 
