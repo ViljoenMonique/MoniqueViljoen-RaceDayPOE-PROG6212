@@ -2,28 +2,27 @@ name: Part 2 CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
 
-    - name: Restore dependencies
-      run: dotnet restore
+    - name: Restore
+      run: dotnet restore RaceDay.Api.sln
 
     - name: Build
-      run: dotnet build --no-restore --configuration Release
+      run: dotnet build RaceDay.Api.sln --no-restore
 
-    - name: Run Unit Tests
-      run: dotnet test --no-build --configuration Release --verbosity normal
+    - name: Test
+      run: dotnet test RaceDay.Api.Tests/RaceDay.Api.Tests.csproj --no-build --verbosity normal
