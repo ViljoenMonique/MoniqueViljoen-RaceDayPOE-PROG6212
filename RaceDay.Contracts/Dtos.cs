@@ -10,13 +10,11 @@ namespace RaceDay.Contracts
         public string Role { get; set; } = string.Empty; // "Organiser" or "Participant"
         public string? Phone { get; set; }
     }
-
     public class LoginRequest
     {
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
     }
-
     public class AuthResponse
     {
         public int UserId { get; set; }
@@ -26,7 +24,6 @@ namespace RaceDay.Contracts
         public string Role { get; set; } = string.Empty;
         public string Message { get; set; } = string.Empty;
     }
-
     // ========== PROFILE ==========
     public class ProfileDto
     {
@@ -37,14 +34,12 @@ namespace RaceDay.Contracts
         public string Role { get; set; } = string.Empty;
         public string? Phone { get; set; }
     }
-
     public class UpdateProfileRequest
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string? Phone { get; set; }
     }
-
     // ========== EVENTS ==========
     public class CreateEventRequest
     {
@@ -56,7 +51,6 @@ namespace RaceDay.Contracts
         public string EventType { get; set; } = string.Empty; // Running, Walking, Cycling
         public int? MaxParticipants { get; set; }
     }
-
     public class UpdateEventRequest
     {
         public string EventName { get; set; } = string.Empty;
@@ -68,7 +62,6 @@ namespace RaceDay.Contracts
         public int? MaxParticipants { get; set; }
         public string Status { get; set; } = "Open";
     }
-
     public class EventDto
     {
         public int EventId { get; set; }
@@ -82,7 +75,15 @@ namespace RaceDay.Contracts
         public int? MaxParticipants { get; set; }
         public string Status { get; set; } = string.Empty;
     }
-
+    // ========== EVENT IMAGES (Part 3) ==========
+    public class EventImageDto
+    {
+        public int EventImageId { get; set; }
+        public int EventId { get; set; }
+        public string ImageUrl { get; set; } = string.Empty;
+        public string? Caption { get; set; }
+        public bool IsPrimary { get; set; }
+    }
     // ========== CATEGORIES ==========
     public class CreateCategoryRequest
     {
@@ -93,7 +94,6 @@ namespace RaceDay.Contracts
         public string? GenderRestriction { get; set; }
         public decimal EntryFee { get; set; }
     }
-
     public class CategoryDto
     {
         public int CategoryId { get; set; }
@@ -105,14 +105,12 @@ namespace RaceDay.Contracts
         public string? GenderRestriction { get; set; }
         public decimal EntryFee { get; set; }
     }
-
     // ========== ENROLMENTS ==========
     public class CreateEnrolmentRequest
     {
         public int EventId { get; set; }
         public int CategoryId { get; set; }
     }
-
     public class EnrolmentDto
     {
         public int EnrolmentId { get; set; }
@@ -122,7 +120,6 @@ namespace RaceDay.Contracts
         public DateTime EnrolmentDate { get; set; }
         public string Status { get; set; } = string.Empty;
     }
-
     // ========== RESULTS ==========
     public class CreateResultRequest
     {
@@ -132,7 +129,6 @@ namespace RaceDay.Contracts
         public string Status { get; set; } = "Finished"; // Finished, DNF, DNS
         public string? Notes { get; set; }
     }
-
     public class ResultDto
     {
         public int ResultId { get; set; }
