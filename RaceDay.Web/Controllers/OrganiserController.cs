@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using RaceDay.Web.Services;
 
 namespace RaceDay.Web.Controllers
