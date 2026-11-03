@@ -7,7 +7,7 @@ namespace RaceDay.Contracts
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public string Role { get; set; } = string.Empty; // "Organiser" or "Participant"
+        public string Role { get; set; } = string.Empty;
         public string? Phone { get; set; }
     }
     public class LoginRequest
@@ -33,6 +33,7 @@ namespace RaceDay.Contracts
         public string Email { get; set; } = string.Empty;
         public string Role { get; set; } = string.Empty;
         public string? Phone { get; set; }
+        public string? ProfileImageUrl { get; set; }
     }
     public class UpdateProfileRequest
     {
@@ -48,7 +49,7 @@ namespace RaceDay.Contracts
         public DateTime EventDate { get; set; }
         public string Location { get; set; } = string.Empty;
         public decimal? DistanceKm { get; set; }
-        public string EventType { get; set; } = string.Empty; // Running, Walking, Cycling
+        public string EventType { get; set; } = string.Empty;
         public int? MaxParticipants { get; set; }
     }
     public class UpdateEventRequest
@@ -75,7 +76,7 @@ namespace RaceDay.Contracts
         public int? MaxParticipants { get; set; }
         public string Status { get; set; } = string.Empty;
     }
-    // ========== EVENT IMAGES (Part 3) ==========
+    // ========== EVENT IMAGES ==========
     public class EventImageDto
     {
         public int EventImageId { get; set; }
@@ -87,6 +88,7 @@ namespace RaceDay.Contracts
     // ========== CATEGORIES ==========
     public class CreateCategoryRequest
     {
+        public int EventId { get; set; }
         public string CategoryName { get; set; } = string.Empty;
         public decimal? DistanceKm { get; set; }
         public int? AgeMin { get; set; }
@@ -126,7 +128,7 @@ namespace RaceDay.Contracts
         public int EnrolmentId { get; set; }
         public TimeSpan? FinishTime { get; set; }
         public int? Position { get; set; }
-        public string Status { get; set; } = "Finished"; // Finished, DNF, DNS
+        public string Status { get; set; } = "Finished";
         public string? Notes { get; set; }
     }
     public class ResultDto
