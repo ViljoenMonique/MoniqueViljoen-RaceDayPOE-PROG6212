@@ -120,7 +120,7 @@ A GitHub Actions workflow is configured to restore, build, and run all unit test
 The Part 3 GitHub Actions workflow builds the entire solution (including the MVC project) and runs the unit tests.
 
 **CI Build Screenshot:**  
-![CI Build](./docs/part3 ci-green.png)
+![CI Build](./docs/Part3 ci-green.png)
 
 **Part 3 Video:** https://youtu.be/YOUR_PART3_VIDEO_ID
 
