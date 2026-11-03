@@ -7,13 +7,14 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-    - name: Setup .NET
+    - name: Setup .NET 8
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
@@ -21,5 +22,8 @@ jobs:
     - name: Restore
       run: dotnet restore RaceDay.Api.sln
 
-    - name: Build Web
-      run: dotnet build RaceDay.Web/RaceDay.Web.csproj --no-restore
+    - name: Build
+      run: dotnet build RaceDay.Api.sln --no-restore --configuration Release
+
+    - name: Run Unit Tests
+      run: dotnet test RaceDay.Api.Tests/RaceDay.Api.Tests.csproj --no-build --configuration Release --verbosity normal
