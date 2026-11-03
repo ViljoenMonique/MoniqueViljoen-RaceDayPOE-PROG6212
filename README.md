@@ -85,17 +85,59 @@ A GitHub Actions workflow is configured to restore, build, and run all unit test
 
 **Part 2 Video:** https://youtu.be/jQnxK9J5PcQ
 
+## Part 3 – MVC Front End + Azure Blob Storage + Docker
+### Technologies Used
+- ASP.NET Core MVC (.NET 8)
+- HttpClient (consuming Part 2 API)
+- Session-based Authentication
+- Azure Blob Storage (or Azurite for local development)
+- Docker & Docker Compose
+- GitHub Actions CI/CD
+
+### How to Run with Docker (Recommended)
+1. Make sure Docker Desktop is running.
+2. In the root of the repository, run:
+   ```bash
+   docker-compose up -d
+   ```
+3. Open the web application:  
+   **http://localhost:8081**
+4. API (Swagger):  
+   **http://localhost:8080/swagger**
+
+### How to Run without Docker
+1. Start the API project (`RaceDay.Api`).
+2. Start the MVC project (`RaceDay.Web`).
+3. Update the `BaseAddress` in `RaceDay.Web/Program.cs` if your API port is different.
+
+### Features Demonstrated
+- Role-based navigation and pages
+- Full event → category → enrolment → result flow
+- Profile and event banner image uploads (Azure Blob / Azurite)
+- Dockerised environment
+
+### CI/CD
+The Part 3 GitHub Actions workflow builds the entire solution (including the MVC project) and runs the unit tests.
+
+**CI Build Screenshot:**  
+![CI Build](./docs/part3 ci-green.png)
+
+**Part 3 Video:** https://youtu.be/YOUR_PART3_VIDEO_ID
+
 ---
+
 ## Repository Structure
 ```bash
-RaceDay/                              ← Root of the repository
+RaceDay/                                      ← Root of the repository
 │
-├── docs/                             ← Part 1 planning documents
+├── docs/                                     ← Part 1 planning documents + CI screenshots
 │   ├── RaceDay_ERD.pdf
-│   ├── RaceDay_API_Endpoint_Plan.pdf (or .md)
-│   └── RaceDay_Database.sql
+│   ├── RaceDay_API_Endpoint_Plan.md
+│   ├── RaceDay_Database.sql
+│   ├── part2-ci-screenshot.png
+│   └── ci-green.png                          ← Part 3 green CI screenshot
 │
-├── RaceDay.Api/                      ← ASP.NET Core Web API project
+├── RaceDay.Api/                              ← ASP.NET Core Web API (Part 2)
 │   ├── Controllers/
 │   │   ├── AuthController.cs
 │   │   ├── ProfileController.cs
@@ -116,19 +158,52 @@ RaceDay/                              ← Root of the repository
 │   ├── Program.cs
 │   └── RaceDay.Api.csproj
 │
-├── RaceDay.Contracts/                ← Shared DTOs
+├── RaceDay.Web/                              ← ASP.NET Core MVC (Part 3)
+│   ├── Controllers/
+│   │   ├── AccountController.cs
+│   │   ├── HomeController.cs
+│   │   ├── OrganiserController.cs
+│   │   ├── EventsController.cs
+│   │   ├── CategoriesController.cs
+│   │   ├── EnrolmentsController.cs
+│   │   ├── ResultsController.cs
+│   │   └── ProfileController.cs
+│   ├── Services/
+│   │   └── ApiService.cs
+│   ├── Views/
+│   │   ├── Account/
+│   │   ├── Organiser/
+│   │   ├── Events/
+│   │   ├── Categories/
+│   │   ├── Enrolments/
+│   │   ├── Results/
+│   │   ├── Profile/
+│   │   └── Shared/
+│   ├── wwwroot/
+│   ├── Program.cs
+│   └── RaceDay.Web.csproj
+│
+├── RaceDay.Contracts/                        ← Shared DTOs (Part 2 & 3)
 │   ├── Dtos.cs
 │   └── RaceDay.Contracts.csproj
 │
-├── RaceDay.Api.Tests/                ← Unit Tests
+├── RaceDay.Api.Tests/                        ← Unit Tests (Part 2)
 │   ├── AuthAndRoleTests.cs
 │   └── RaceDay.Api.Tests.csproj
 │
 ├── .github/
 │   └── workflows/
-│       ├── part1-ci.yml              ← (optional - keep from Part 1)
-│       └── part2-ci.yml              ← Part 2 CI workflow
+│       ├── part1-ci.yml                      ← Part 1 Structure Validation
+│       ├── part2-ci.yml                      ← Part 2 CI workflow
+│       └── part3-ci.yml                      ← Part 3 CI workflow
 │
-├── RaceDay.sln                       ← Solution file
-└── README.md                         ← Updated README
+├── docker-compose.yml                        ← Docker setup (Part 3)
+├── RaceDay.Api.sln                           ← Solution file
+└── README.md
+```
+
+---
+
+*PROG6212 – Programming 2B Portfolio of Evidence*
+
 
