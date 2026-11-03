@@ -1,0 +1,61 @@
+﻿@model RaceDay.Contracts.CreateCategoryRequest
+
+@{
+    ViewData["Title"] = "Add Category";
+    int eventId = ViewBag.EventId;
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h3>Add Category</h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    <input type="hidden" name="eventId" value="@eventId" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="CategoryName" class="form-label">Category Name</label>
+                        <input asp-for="CategoryName" class="form-control" placeholder="e.g. 42km Marathon" />
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DistanceKm" class="form-label">Distance (km)</label>
+                            <input asp-for="DistanceKm" class="form-control" type="number" step="0.1" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="EntryFee" class="form-label">Entry Fee (R)</label>
+                            <input asp-for="EntryFee" class="form-control" type="number" step="0.01" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="AgeMin" class="form-label">Minimum Age</label>
+                            <input asp-for="AgeMin" class="form-control" type="number" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="AgeMax" class="form-label">Maximum Age</label>
+                            <input asp-for="AgeMax" class="form-control" type="number" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="GenderRestriction" class="form-label">Gender Restriction</label>
+                        <select asp-for="GenderRestriction" class="form-select">
+                            <option value="">None</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Save Category</button>
+                    <a asp-action="Index" asp-route-eventId="@eventId" class="btn btn-outline-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

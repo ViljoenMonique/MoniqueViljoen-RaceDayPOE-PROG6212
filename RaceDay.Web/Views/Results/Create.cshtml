@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Capture Result";
+    int enrolmentId = ViewBag.EnrolmentId;
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3>Capture Result</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" action="/Results/Create">
+                    <input type="hidden" name="EnrolmentId" value="@enrolmentId" />
+
+                    <div class="mb-3">
+                        <label class="form-label">Finish Time (hh:mm:ss)</label>
+                        <input name="FinishTime" class="form-control" type="text" value="03:45:22" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Position</label>
+                        <input name="Position" class="form-control" type="number" value="156" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select name="Status" class="form-select">
+                            <option value="Finished" selected>Finished</option>
+                            <option value="DNF">DNF</option>
+                            <option value="DNS">DNS</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Notes</label>
+                        <textarea name="Notes" class="form-control" rows="2">Strong finish</textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Result</button>
+                    <a href="/Organiser" class="btn btn-outline-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

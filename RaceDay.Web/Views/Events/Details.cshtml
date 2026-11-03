@@ -1,0 +1,137 @@
+﻿@model RaceDay.Contracts.EventDto
+@{
+    ViewData["Title"] = Model.EventName;
+    var categories = ViewBag.Categories as List<RaceDay.Contracts.CategoryDto> ?? new List<RaceDay.Contracts.CategoryDto>();
+    var isParticipant = ViewBag.IsParticipant as bool? ?? false;
+    var images = ViewBag.Images as List<RaceDay.Contracts.EventImageDto> ?? new List<RaceDay.Contracts.EventImageDto>();
+    var isOrganiser = Context.Session.GetString("Role") == "Organiser";
+}
+
+<div class="container mt-4">
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h1 class="card-title mb-4">@Model.EventName</h1>
+            <div class="row mb-2">
+                <div class="col-sm-3 text-muted fw-semibold">Date</div>
+                <div class="col-sm-9">@Model.EventDate.ToString("dd MMM yyyy")</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-3 text-muted fw-semibold">Location</div>
+                <div class="col-sm-9">@Model.Location</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-3 text-muted fw-semibold">Type</div>
+                <div class="col-sm-9">@Model.EventType</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-3 text-muted fw-semibold">Distance</div>
+                <div class="col-sm-9">@(Model.DistanceKm?.ToString("0.00") ?? "N/A") km</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-3 text-muted fw-semibold">Description</div>
+                <div class="col-sm-9">@(string.IsNullOrEmpty(Model.Description) ? "No description" : Model.Description)</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">Event Images</div>
+        <div class="card-body">
+            @if (isOrganiser)
+            {
+                <form asp-controller="Events" asp-action="UploadImage" method="post" enctype="multipart/form-data" class="mb-4">
+                    <input type="hidden" name="eventId" value="@Model.EventId" />
+                    <div class="row g-2">
+                        <div class="col-md-5">
+                            <input type="file" name="imageFile" class="form-control" accept="image/*" required />
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="caption" class="form-control" placeholder="Caption (optional)" />
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary w-100">Upload Image</button>
+                        </div>
+                    </div>
+                </form>
+            }
+
+            @if (images.Any())
+            {
+                <div class="row">
+                    @foreach (var image in images)
+                    {
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <img src="@image.ImageUrl" class="event-image" alt="@image.Caption" />
+                            @if (!string.IsNullOrEmpty(image.Caption))
+                            {
+                                <p class="small text-muted mt-1 mb-0">@image.Caption</p>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted mb-0">No images have been uploaded for this event yet.</p>
+            }
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">Categories</div>
+        <div class="card-body">
+            @if (categories.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Distance</th>
+                                <th>Entry Fee</th>
+                                <th>Age</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var cat in categories)
+                            {
+                                <tr>
+                                    <td>@cat.CategoryName</td>
+                                    <td>@(cat.DistanceKm?.ToString("0.00") ?? "-") km</td>
+                                    <td>R @cat.EntryFee.ToString("0.00")</td>
+                                    <td>@(cat.AgeMin ?? 0)+</td>
+                                    <td class="text-end">
+                                        @if (isParticipant)
+                                        {
+                                            <form asp-action="EnterEvent" method="post" class="d-inline">
+                                                <input type="hidden" name="eventId" value="@Model.EventId" />
+                                                <input type="hidden" name="categoryId" value="@cat.CategoryId" />
+                                                <button type="submit" class="btn btn-sm btn-success">Enter Event</button>
+                                            </form>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p class="text-muted mb-0">No categories available for this event yet.</p>
+            }
+        </div>
+    </div>
+
+    <a asp-action="Index" class="btn btn-secondary">Back to Events</a>
+</div>

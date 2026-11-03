@@ -1,0 +1,39 @@
+﻿@model List<RaceDay.Contracts.EventDto>
+
+@{
+    ViewData["Title"] = "Upcoming Events";
+}
+
+<div class="text-center mb-4">
+    <h1 class="display-5 fw-bold">Upcoming RaceDay Events</h1>
+    <p class="lead">Find your next run, walk or cycle event</p>
+</div>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">No events available at the moment.</div>
+}
+else
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.EventName</h5>
+                        <p class="card-text">
+                            <strong>Date:</strong> @item.EventDate.ToString("dd MMM yyyy") <br />
+                            <strong>Location:</strong> @item.Location <br />
+                            <strong>Type:</strong> @item.EventType <br />
+                            <strong>Distance:</strong> @(item.DistanceKm?.ToString() ?? "N/A") km
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <a asp-controller="Events" asp-action="Details" asp-route-id="@item.EventId" class="btn btn-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,53 @@
+﻿@model List<RaceDay.Contracts.EnrolmentDto>
+
+@{
+    ViewData["Title"] = "Event Enrolments";
+}
+
+<h1>Enrolments for Event</h1>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">No participants have enrolled yet.</div>
+}
+else
+{
+    <table class="table table-striped shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Enrolment ID</th>
+                <th>Participant ID</th>
+                <th>Category ID</th>
+                <th>Status</th>
+                <th>Enrolment Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.EnrolmentId</td>
+                    <td>@item.ParticipantId</td>
+                    <td>@item.CategoryId</td>
+                    <td>
+                        @if (item.Status == "Confirmed")
+                        {
+                            <span class="badge bg-success">Confirmed</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">@item.Status</span>
+                        }
+                    </td>
+                    <td>@item.EnrolmentDate.ToString("dd MMM yyyy")</td>
+                    <td>
+                        <a asp-controller="Results" asp-action="Create" asp-route-enrolmentId="@item.EnrolmentId" class="btn btn-sm btn-success">Capture Result</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-controller="Organiser" asp-action="Index" class="btn btn-secondary mt-3">Back to Dashboard</a>

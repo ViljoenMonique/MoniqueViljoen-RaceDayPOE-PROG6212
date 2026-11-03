@@ -1,0 +1,45 @@
+﻿@model List<RaceDay.Contracts.ResultDto>
+@{
+    ViewData["Title"] = "My Results";
+}
+
+<h1 class="mb-4">My Results</h1>
+
+<div class="card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Result ID</th>
+                        <th>Enrolment ID</th>
+                        <th>Finish Time</th>
+                        <th>Position</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model == null || !Model.Any())
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">You have no results yet.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ResultId</td>
+                                <td>@item.EnrolmentId</td>
+                                <td>@(item.FinishTime?.ToString() ?? "-")</td>
+                                <td>@(item.Position?.ToString() ?? "-")</td>
+                                <td><span class="badge bg-primary">@item.Status</span></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

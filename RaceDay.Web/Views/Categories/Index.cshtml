@@ -1,0 +1,52 @@
+﻿@model List<RaceDay.Contracts.CategoryDto>
+
+@{
+    ViewData["Title"] = "Categories";
+    int eventId = ViewBag.EventId;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Categories for Event</h1>
+    <a asp-action="Create" asp-route-eventId="@eventId" class="btn btn-success">+ Add Category</a>
+</div>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">No categories yet for this event.</div>
+}
+else
+{
+    <table class="table table-striped shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Category Name</th>
+                <th>Distance</th>
+                <th>Age Min</th>
+                <th>Age Max</th>
+                <th>Entry Fee</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CategoryName</td>
+                    <td>@item.DistanceKm km</td>
+                    <td>@(item.AgeMin?.ToString() ?? "-")</td>
+                    <td>@(item.AgeMax?.ToString() ?? "-")</td>
+                    <td>R @item.EntryFee.ToString("0.00")</td>
+                    <td>
+                        <form asp-action="Delete" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@item.CategoryId" />
+                            <input type="hidden" name="eventId" value="@eventId" />
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this category?');">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-controller="Organiser" asp-action="Index" class="btn btn-secondary mt-3">Back to Dashboard</a>

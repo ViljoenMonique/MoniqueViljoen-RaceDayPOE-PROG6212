@@ -1,0 +1,63 @@
+﻿@model List<RaceDay.Contracts.EnrolmentDto>
+@{
+    ViewData["Title"] = "My Enrolments";
+}
+
+<h1 class="mb-4">My Enrolments</h1>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<div class="card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Enrolment ID</th>
+                        <th>Event ID</th>
+                        <th>Category ID</th>
+                        <th>Status</th>
+                        <th>Enrolment Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model == null || !Model.Any())
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">You have not enrolled in any events yet.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.EnrolmentId</td>
+                                <td>@item.EventId</td>
+                                <td>@item.CategoryId</td>
+                                <td>
+                                    @if (item.Status == "Confirmed")
+                                    {
+                                        <span class="badge bg-success">Confirmed</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning text-dark">@item.Status</span>
+                                    }
+                                </td>
+                                <td>@item.EnrolmentDate.ToString("dd MMM yyyy")</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
