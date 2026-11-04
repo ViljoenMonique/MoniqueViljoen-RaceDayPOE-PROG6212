@@ -83,7 +83,7 @@ A GitHub Actions workflow is configured to restore, build, and run all unit test
 **CI Build Screenshot:**  
 ![CI Build](./docs/part2-ci-screenshot.png)
 
-**Part 2 Video:** https://youtu.be/qeAIvLAdCiY
+**Part 2 Video:** https://youtu.be/jQnxK9J5PcQ
 
 ## Part 3 – MVC Front End + Azure Blob Storage + Docker
 ### Technologies Used
@@ -122,7 +122,7 @@ The Part 3 GitHub Actions workflow builds the entire solution (including the MVC
 **CI Build Screenshot:**  
 ![CI Build](./docs/Part3%20ci-green.png)
 
-**Part 3 Video:** https://youtu.be/xR-FXdN32aE
+**Part 3 Video:** https://youtu.be/qeAIvLAdCiY
 
 ---
 
